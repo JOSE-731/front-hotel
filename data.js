@@ -16,30 +16,31 @@ const modalHotel = new bootstrap.Modal(document.getElementById('modalHotel'));
 const formHotel = document.querySelector('form');
 const nombre = document.getElementById('nombre');
 const ciudad = document.getElementById('ciudad');
-const dirreccion = document.getElementById('dirrecion');
+const direccion = document.getElementById('direccion');
 const nit = document.getElementById('nit');
 const numero_habitaciones = document.getElementById('numero_habitaciones');
 
-let opcion = '';
+var opcion = ''
 
 //Funcion para abrir el modal
 
-btnCrear.addEventListener('click', ()=>{
+btnCrear.addEventListener('click', () => {
     //Inicializamos los input a vacio
     nombre.value = '';
     ciudad.value = '';
-    dirreccion.value = '';
+    direccion.value = '';
     nit.value = '';
     numero_habitaciones.value = '';
 
     modalHotel.show()
-    opcion = 'crear';
+    opcion = 'crear'
+    
 })
 
 //Mostar data
-const mostrar = (hotel) =>{
+const mostrar = (hotel) => {
     hotel.forEach(articulo => {
-        
+
         resultados += `
                          <tr> 
                            <td>${articulo.id}</td>
@@ -62,12 +63,12 @@ fetch(url)
     .then(response => response.json())
     .then(data => mostrar(data))
     .catch(error => console.log(error))
-   
+
 
 //Eliminar hotel
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e => {
-        if(e.target.closest(selector)){
+        if (e.target.closest(selector)) {
             handler(e)
         }
     })
@@ -78,15 +79,39 @@ on(document, 'click', '.btnEliminar', e => {
     const fila = e.target.parentNode.parentNode
     const id = fila.firstElementChild.innerHTML
 
-    
-    function data(){
-        fetch(url+id, {
+
+    function data() {
+        fetch(url + id, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(()=> location.reload())
+            .then(res => res.json())
+            .then(() => location.reload())
     }
-    
+
     data();
-    console.log(id);
+})
+
+
+//Guardar
+formHotel.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    if(opcion=='crear'){        
+        //console.log('OPCION CREAR')
+        fetch(url, {
+            method:'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                nombre:nombre.value,
+                ciudad:ciudad.value,
+                direccion:direccion.value,
+                nit:nit.value,
+                numero_habitaciones:numero_habitaciones.value
+            })
+        })
+        .then( res => res.json() )
+        .then(() => location.reload())
+    }
+    modalHotel.hide()
 })
