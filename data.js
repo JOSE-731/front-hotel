@@ -49,7 +49,7 @@ const mostrar = (hotel) => {
                            <td>${articulo.direccion}</td>
                            <td>${articulo.nit}</td>
                            <td>${articulo.numero_habitaciones}</td>
-                           <td class"text-center"><a class = "btnEliminar btn btn-danger mr-2" >Eliminar</a><a class = "btnVer btn btn-primary" href="habitaciones.html?/${articulo.id}">Ver tipo habitacion</a></td>
+                           <td class"text-center"><a class = "btnEliminar btn btn-danger mr-2" >Eliminar</a><a class = "btnVer btn btn-primary" href="habitaciones.html?${articulo.id}">Ver tipo habitacion</a></td>
                          </tr>
                         `
     });

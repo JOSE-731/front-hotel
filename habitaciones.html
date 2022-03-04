@@ -32,6 +32,7 @@
                     <th>Cantidad</th>
                     <th>Tipo habitacion</th>
                     <th>Acomodacion</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,13 +52,19 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3">
-                            <label for="nombre" class="col-form-label">Tipo habitacion:</label>
-                            
+                        <div class="mb-2">
+                            <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg example">
+                                <option selected class="pr-4">Tipo de Habitacion</option>
+                                <option value="1" id="tipo_habitacion">One</option>
+                              </select>       
+                              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                  <option selected>Acomodacion</option>
+                                  <option value="1" id="acomodacion">One</option>
+                                </select>       
                         </div>
                         <div class="mb-3">
-                            <label for="ciudad" class="col-form-label">Acomodacion </label>
-                            <input type="text" class="form-control" id="ciudad" name="ciudad" required autocomplete="off">
+                            <label for="cantidad" class="col-form-label">Cantidad </label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" required autocomplete="off">
                         </div>
                        
                         <div class="modal-footer">
