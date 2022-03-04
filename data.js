@@ -1,7 +1,7 @@
 //Prepárando la data que se consultará
 
 //Url de la api que retorna los hoteles
-const url = 'http://127.0.0.1:8000/api/hoteles';
+const url = 'http://127.0.0.1:8000/api/hoteles/';
 
 //Accedemos a los elementos html como tabla, modal, form, y input.
 
@@ -48,7 +48,7 @@ const mostrar = (hotel) =>{
                            <td>${articulo.direccion}</td>
                            <td>${articulo.nit}</td>
                            <td>${articulo.numero_habitaciones}</td>
-                           <td class"text-center"><a class = "btnEliminar btn btn-danger mr-2">Eliminar</a><a class = "btnVer btn btn-primary">Ver tipo habitacion</a></td>
+                           <td class"text-center"><a class = "btnEliminar btn btn-danger mr-2" >Eliminar</a><a class = "btnVer btn btn-primary">Ver tipo habitacion</a></td>
                          </tr>
                         `
     });
@@ -61,5 +61,32 @@ const mostrar = (hotel) =>{
 fetch(url)
     .then(response => response.json())
     .then(data => mostrar(data))
-    .catch(err = console.log(error))
+    .catch(error => console.log(error))
+   
 
+//Eliminar hotel
+const on = (element, event, selector, handler) => {
+    element.addEventListener(event, e => {
+        if(e.target.closest(selector)){
+            handler(e)
+        }
+    })
+}
+
+on(document, 'click', '.btnEliminar', e => {
+    //Capturamos toda la fila y el id
+    const fila = e.target.parentNode.parentNode
+    const id = fila.firstElementChild.innerHTML
+
+    
+    function data(){
+        fetch(url+id, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(()=> location.reload())
+    }
+    
+    data();
+    console.log(id);
+})
