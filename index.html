@@ -24,7 +24,7 @@
 
 <body>
     <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
-        <button type="button" id="btnCrear" class="btn btn-primary" data-toggle="modal" data-target="#modalHotel">Crear</button>
+        <button type="button" id="btnCrear" class="btn btn-primary" data-toggle="modal">Crear</button>
         <table id="tablaHoteles" class="table mt-2 table-bordered table-striped">
             <thead>
                 <tr class="text-center">
@@ -33,6 +33,8 @@
                     <th>Ciudad</th>
                     <th>Dirreccion</th>
                     <th>Nit</th>
+                    <th>Numero de Habitaciones</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +44,7 @@
     </div>
 
 
-    <div class="modal fade" id="modalHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalHotel" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
