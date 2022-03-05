@@ -16,6 +16,13 @@ const formHabitacion = document.querySelector('form');
 const cantidad = document.getElementById('cantidad');
 const tipo_habitacion = document.getElementById('tipo_habitacion');
 const acomodacion = document.getElementById('acomodacion');
+const id_hotel = document.getElementById("id_hotel");
+
+//Obtener parametro, obtenemos el id del hotel del cual se mostraran las habitaciones que le pertenecen
+const valores = window.location.search;
+
+//Limpiamos el valor que obtenemos
+const newValor = valores.substring(1);
 
 
 btnCrear.addEventListener('click', () => {
@@ -23,18 +30,14 @@ btnCrear.addEventListener('click', () => {
     cantidad.value = '';
     tipo_habitacion.value = '';
     acomodacion.value = '';
+    id_hotel.value;
     modalHabitacion.show()
     opcion = 'crear'
     
 })
 
-//Obtener parametro, obtenemos el id del hotel del cual se mostraran las habitaciones que le pertenecen
-const valores = window.location.search;
 
-//Limpiamos el valor que obtenemos
-const newValor = valores.substring(1);
-const id_hotel = document.getElementById("id_hotel").value = newValor;
-console.log(id_hotel);
+console.log(id_hotel.value = newValor);
 
 //Mostar data de habitaciones
 const mostrar = (hotel) => {
@@ -110,7 +113,7 @@ formHabitacion.addEventListener('submit', (e)=>{
                 cantidad:cantidad.value,
                 tipo_habitacion:tipo_habitacion.value,
                 acomodacion:acomodacion.value,
-                id_hotel:id_hotel.value,
+                id_hotel: id_hotel.value 
             })
         })
         .then( response => response.json() )
