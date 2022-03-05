@@ -17,13 +17,12 @@ const cantidad = document.getElementById('cantidad');
 const tipo_habitacion = document.getElementById('tipo_habitacion');
 const acomodacion = document.getElementById('acomodacion');
 
+
 btnCrear.addEventListener('click', () => {
     //Inicializamos los input a vacio
     cantidad.value = '';
     tipo_habitacion.value = '';
     acomodacion.value = '';
-    id_hotel.value = '';
-
     modalHabitacion.show()
     opcion = 'crear'
     
@@ -34,14 +33,17 @@ const valores = window.location.search;
 
 //Limpiamos el valor que obtenemos
 const newValor = valores.substring(1);
+const id_hotel = document.getElementById("id_hotel").value = newValor;
+console.log(id_hotel);
 
 //Mostar data de habitaciones
 const mostrar = (hotel) => {
 
     //Filtramos las habitaciones segun el id del hotel
-    const hotelSeleccionado =  hotel.filter(p => p.id_hotel == newValor);
-    
-    hotelSeleccionado.forEach(articulo => {
+    const datafiltere =  hotel.filter(p => p.id_hotel == newValor);
+ 
+
+    datafiltere.forEach(articulo => {
         
         resultados += `
         <tr> 
@@ -49,7 +51,6 @@ const mostrar = (hotel) => {
         <td>${articulo.cantidad}</td>
         <td>${articulo.tipo_habitacion}</td>
         <td>${articulo.acomodacion}</td>
-
         <td class"text-center"><a class = "btnEliminar btn btn-danger mr-2" >Eliminar</a></a></td>
         </tr>
         `
@@ -95,9 +96,10 @@ on(document, 'click', '.btnEliminar', e => {
 
 
 //Guardar
-formHotel.addEventListener('submit', (e)=>{
+formHabitacion.addEventListener('submit', (e)=>{
     e.preventDefault()
     if(opcion=='crear'){        
+
         //console.log('OPCION CREAR')
         fetch(url, {
             method:'POST',
@@ -108,11 +110,15 @@ formHotel.addEventListener('submit', (e)=>{
                 cantidad:cantidad.value,
                 tipo_habitacion:tipo_habitacion.value,
                 acomodacion:acomodacion.value,
-                id_hotel:hotelSeleccionado.value,
+                id_hotel:id_hotel.value,
             })
         })
         .then( response => response.json() )
-        .then( response => location.reload() )
+        .then( data => {
+            const nuevoArticulo = []
+            nuevoArticulo.push(data)
+            mostrar(nuevoArticulo)
+        })
     }
-    modalHotel.hide()
+    modalHabitacion.hide()
 })
