@@ -1,10 +1,11 @@
-//Url de la api que retorna los hoteles
+//Url de la apis que se consumiran
 const url = 'http://127.0.0.1:8000/api/habitaciones';
 
 //Accedemos a los elementos html como tabla, modal, form, y input.
 
 //Tabla
 const contenedor = document.querySelector('tbody');
+
 let resultados = '';
 
 //Modal
@@ -34,7 +35,7 @@ const valores = window.location.search;
 //Limpiamos el valor que obtenemos
 const newValor = valores.substring(1);
 
-//Mostar data
+//Mostar data de habitaciones
 const mostrar = (hotel) => {
 
     //Filtramos las habitaciones segun el id del hotel
@@ -58,19 +59,12 @@ const mostrar = (hotel) => {
 }
 
 
-
 //Consumiendo la api de habitaciones
 fetch(url)
 .then(response => response.json())
 .then(data => mostrar(data))
 .catch(error => console.log(error))
 
-//Consumiendo la api de datos de apoyo
-//Consumiendo la api de habitaciones
-fetch(url)
-.then(response => response.json())
-.then(data => mostrar(data))
-.catch(error => console.log(error))
 
 
 //Eliminar hotel

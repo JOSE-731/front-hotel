@@ -53,18 +53,19 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-2">
-                            <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg example">
-                                <option selected class="pr-4">Tipo de Habitacion</option>
-                                <option value="1" id="tipo_habitacion">One</option>
-                              </select>       
-                              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                  <option selected>Acomodacion</option>
-                                  <option value="1" id="acomodacion">One</option>
-                                </select>       
+                            <label for="tipo_habitacion" class="col-form-label">Tipo de Habitacion </label>
+                            <input type="text" class="form-control" id="tipo_habitacion" name="tipo_habitacion" required autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <label for="acomodacion" class="col-form-label">Acomodacion </label>
+                            <input type="text" class="form-control" id="acomodacion" name="acomodacion" required autocomplete="off">
                         </div>
                         <div class="mb-3">
                             <label for="cantidad" class="col-form-label">Cantidad </label>
                             <input type="number" class="form-control" id="cantidad" name="cantidad" required autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="id_hotel" name="id_hotel" required autocomplete="off" hidden>
                         </div>
                        
                         <div class="modal-footer">
