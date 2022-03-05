@@ -1,5 +1,5 @@
 //Url de la apis que se consumiran
-const url = 'http://127.0.0.1:8000/api/habitaciones';
+const url = 'http://127.0.0.1:8000/api/habitaciones/';
 
 //Accedemos a los elementos html como tabla, modal, form, y input.
 
@@ -22,7 +22,7 @@ btnCrear.addEventListener('click', () => {
     cantidad.value = '';
     tipo_habitacion.value = '';
     acomodacion.value = '';
-  
+    id_hotel.value = '';
 
     modalHabitacion.show()
     opcion = 'crear'
@@ -105,11 +105,10 @@ formHotel.addEventListener('submit', (e)=>{
                 'Content-Type':'application/json'
             },
             body: JSON.stringify({
-                nombre:nombre.value,
-                ciudad:ciudad.value,
-                direccion:direccion.value,
-                nit:nit.value,
-                numero_habitaciones:numero_habitaciones.value
+                cantidad:cantidad.value,
+                tipo_habitacion:tipo_habitacion.value,
+                acomodacion:acomodacion.value,
+                id_hotel:hotelSeleccionado.value,
             })
         })
         .then( response => response.json() )
