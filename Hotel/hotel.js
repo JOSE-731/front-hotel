@@ -20,7 +20,8 @@ const direccion = document.getElementById('direccion');
 const nit = document.getElementById('nit');
 const numero_habitaciones = document.getElementById('numero_habitaciones');
 
-var opcion = ''
+var opcion = '';
+var datas = [];
 
 //Funcion para abrir el modal
 
@@ -34,12 +35,15 @@ btnCrear.addEventListener('click', () => {
 
     modalHotel.show()
     opcion = 'crear'
-    
+
 })
 
 //Mostar data
 const mostrar = (hotel) => {
     hotel.forEach(articulo => {
+
+        // datas = articulo.ciudad;
+        datas.push(articulo.nombre);
 
         resultados += `
                          <tr> 
@@ -58,11 +62,6 @@ const mostrar = (hotel) => {
 }
 
 
-//Consumiendo la api
-fetch(url)
-    .then(response => response.json())
-    .then(data => mostrar(data))
-    .catch(error => console.log(error))
 
 
 //Eliminar hotel
@@ -93,25 +92,51 @@ on(document, 'click', '.btnEliminar', e => {
 
 
 //Guardar
-formHotel.addEventListener('submit', (e)=>{
+formHotel.addEventListener('submit', (e) => {
     e.preventDefault()
-    if(opcion=='crear'){        
-        //console.log('OPCION CREAR')
-        fetch(url, {
-            method:'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                nombre:nombre.value,
-                ciudad:ciudad.value,
-                direccion:direccion.value,
-                nit:nit.value,
-                numero_habitaciones:numero_habitaciones.value
+
+
+
+    if (opcion == 'crear') {
+
+        const found = datas.find(element => element == nombre.value);
+        //const datafiltere =  datas.filter(p => p.ciudad === ciudad);
+        console.log(found)
+
+        //Validaciones
+        //Filtramos por nombre de hotel para saber si el hotel que se esta ingresando ya existe
+
+
+        if (typeof found !== 'undefined' ) {
+
+            alert('Ya existe un hotel con los datos ingresados')
+            modalHotel.hide()
+
+
+        } else{
+
+            //console.log('OPCION CREAR')
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombre.value,
+                    ciudad: ciudad.value,
+                    direccion: direccion.value,
+                    nit: nit.value,
+                    numero_habitaciones: numero_habitaciones.value
+                })
             })
-        })
-        .then( response => response.json() )
-        .then( response => location.reload() )
+                .then(response => response.json())
+                .then(response => location.reload())
+        }
+        modalHotel.hide()
     }
-    modalHotel.hide()
 })
+//Consumiendo la api
+fetch(url)
+    .then(response => response.json())
+    .then(data => mostrar(data))
+    .catch(error => console.log(error))

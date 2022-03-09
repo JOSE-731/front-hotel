@@ -14,7 +14,7 @@ const modalHabitacion = new bootstrap.Modal(document.getElementById('modalHabita
 //Form y Input
 const formHabitacion = document.querySelector('form');
 const cantidad = document.getElementById('cantidad');
-const tipo_habitacion = document.getElementById('tipo_habitacion');
+const  tipo_habitacion = document.getElementById('tipo_habitacion');
 const acomodacion = document.getElementById('acomodacion');
 const id_hotel = document.getElementById("id_hotel");
 
@@ -26,15 +26,12 @@ const newValor = valores.substring(1);
 
 
 btnCrear.addEventListener('click', () => {
-    //Inicializamos los input a vacio
-    cantidad.value = '';
-    tipo_habitacion.value = '';
-    acomodacion.value = '';
-    id_hotel.value;
+   
     modalHabitacion.show()
     opcion = 'crear'
     
 })
+
 
 
 console.log(id_hotel.value = newValor);
@@ -98,30 +95,32 @@ on(document, 'click', '.btnEliminar', e => {
 })
 
 
-//Guardar
-formHabitacion.addEventListener('submit', (e)=>{
-    e.preventDefault()
-    if(opcion=='crear'){        
+    //Guardar
+    formHabitacion.addEventListener('submit', (e)=>{
+        e.preventDefault()
 
-        //console.log('OPCION CREAR')
-        fetch(url, {
-            method:'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                cantidad:cantidad.value,
-                tipo_habitacion:tipo_habitacion.value,
-                acomodacion:acomodacion.value,
-                id_hotel: id_hotel.value 
+        if(opcion=='crear'){        
+    
+            //console.log('OPCION CREAR')
+            fetch(url, {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    cantidad:cantidad.value,
+                    tipo_habitacion:tipo_habitacion.value,
+                    acomodacion:acomodacion.value,
+                    id_hotel: id_hotel.value 
+                })
             })
-        })
-        .then( response => response.json() )
-        .then( data => {
-            const nuevoArticulo = []
-            nuevoArticulo.push(data)
-            mostrar(nuevoArticulo)
-        })
-    }
-    modalHabitacion.hide()
-})
+            .then( response => response.json() )
+            .then( data => {
+                const nuevoArticulo = []
+                nuevoArticulo.push(data)
+                mostrar(nuevoArticulo)
+            })
+        }
+        modalHabitacion.hide()
+    })
+
